@@ -1,3 +1,4 @@
+// Health.cs
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -5,29 +6,19 @@ using UnityEngine.UI;
 
 public class Health : MonoBehaviour
 {
-    public int health;
-    public int maxHealth;
-
+    public PlayerHealth playerHealth;
     public Sprite emptyHeart;
     public Sprite fullHeart;
     public Image[] hearts;
 
-    public PlayerHealth playerHealth;
-
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
     void Update()
     {
-        health = playerHealth.health;
-        maxHealth = playerHealth.maxHealth;
-        
+        int currentHealth = playerHealth.GetCurrentHealth();
+        int maxHealth = playerHealth.maxHealth;
+
         for (int i = 0; i < 4; i++)
         {
-            if(i < health)
+            if (i < currentHealth)
             {
                 hearts[i].sprite = fullHeart;
             }
@@ -36,7 +27,7 @@ public class Health : MonoBehaviour
                 hearts[i].sprite = emptyHeart;
             }
 
-            if(i < maxHealth)
+            if (i < maxHealth)
             {
                 hearts[i].enabled = true;
             }

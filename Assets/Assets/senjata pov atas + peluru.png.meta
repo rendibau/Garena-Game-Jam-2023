@@ -1,10 +1,7 @@
 fileFormatVersion: 2
-guid: d227bc4196184fe44a196a8c6b4aae0c
+guid: 347d96a5470ad284db7f971ab55666c4
 TextureImporter:
-  internalIDToNameTable:
-  - first:
-      213: 2283913201129443858
-    second: nyawaI_0
+  internalIDToNameTable: []
   externalObjects: {}
   serializedVersion: 12
   mipmaps:
@@ -123,19 +120,6 @@ TextureImporter:
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
   - serializedVersion: 3
-    buildTarget: tvOS
-    maxTextureSize: 2048
-    resizeAlgorithm: 0
-    textureFormat: -1
-    textureCompression: 1
-    compressionQuality: 50
-    crunchedCompression: 0
-    allowsAlphaSplitting: 0
-    overridden: 0
-    ignorePlatformSupport: 0
-    androidETC2FallbackOverride: 0
-    forceMaximumCompressionQuality_BC6H_BC7: 0
-  - serializedVersion: 3
     buildTarget: Windows Store Apps
     maxTextureSize: 2048
     resizeAlgorithm: 0
@@ -165,22 +149,85 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: nyawaI_0
+      name: senjata pov atas + peluru_0
       rect:
         serializedVersion: 2
-        x: 22
-        y: 0
-        width: 383
-        height: 366
+        x: 0
+        y: 53
+        width: 28
+        height: 314
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: 212552ba4f612bf10800000000000000
-      internalID: 2283913201129443858
+      spriteID: 1855531dae6fddf4fa1f22b6d6ede9a2
+      internalID: 1522213865
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: senjata pov atas + peluru_1
+      rect:
+        serializedVersion: 2
+        x: 215
+        y: 1
+        width: 29
+        height: 369
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: cbda2c3b937d04140be37eb9e0a7869f
+      internalID: 822930563
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: senjata pov atas + peluru_2
+      rect:
+        serializedVersion: 2
+        x: 350
+        y: 8
+        width: 17
+        height: 47
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6552ca42f0a917c4a92d11fa39c591c6
+      internalID: 953398600
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: senjata pov atas + peluru_3
+      rect:
+        serializedVersion: 2
+        x: 702
+        y: 9
+        width: 372
+        height: 498
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 713ad944f09d58240aadb922f0609dbe
+      internalID: -1527219349
       vertices: []
       indices: 
       edges: []
@@ -188,7 +235,7 @@ TextureImporter:
     outline: []
     physicsShape: []
     bones: []
-    spriteID: 
+    spriteID: 5e97eb03825dee720800000000000000
     internalID: 0
     vertices: []
     indices: 
@@ -196,7 +243,10 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      nyawaI_0: 2283913201129443858
+      senjata pov atas + peluru_0: 1522213865
+      senjata pov atas + peluru_1: 822930563
+      senjata pov atas + peluru_2: 953398600
+      senjata pov atas + peluru_3: -1527219349
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

@@ -21,15 +21,20 @@ public class EnemyChaser : MonoBehaviour
     public void TakeDamage(int damage)
     {
         currentHealth -= damage;
-        Debug.Log("Player took " + damage + " damage. Current Health: " + currentHealth);
-        
-        if(currentHealth == 0)
+        Debug.Log("Musuh menerima " + damage + " damage. Kesehatan Saat Ini: " + currentHealth);
+
+        if (currentHealth <= 0)
+        {
+            LevelManager.manager.IncreaseScore(1); // Tingkatkan skor saat musuh berhasil dihancurkan
+            Destroy(gameObject);
+            target = null;
+        }
+        else if (currentHealth <= maxHealth - 4) // Periksa apakah musuh sudah terkena 4 kali
         {
             LevelManager.manager.GameOver();
-        Destroy(gameObject);
-        target = null;
         }
     }
+
     private void Update()
     {
         if (!target)
@@ -41,10 +46,12 @@ public class EnemyChaser : MonoBehaviour
             RotateTowardsTarget();
         }
     }
+
     private void FixedUpdate()
     {
         rb.velocity = transform.up * speed;
     }
+
     private void RotateTowardsTarget()
     {
         Vector2 targetDirection = target.position - transform.position;
@@ -52,6 +59,7 @@ public class EnemyChaser : MonoBehaviour
         Quaternion q = Quaternion.Euler(new Vector3(0, 0, angle));
         transform.localRotation = Quaternion.Slerp(transform.localRotation, q, rotateSpeed);
     }
+
     private void GetTarget()
     {
         if (GameObject.FindGameObjectWithTag("Player"))
@@ -59,20 +67,20 @@ public class EnemyChaser : MonoBehaviour
             target = GameObject.FindGameObjectWithTag("Player").transform;
         }
     }
+
+
     private void OnCollisionEnter2D(Collision2D other)
     {
         if (other.gameObject.CompareTag("Player"))
         {
             PlayerHealth playerHealth = other.gameObject.GetComponent<PlayerHealth>();
-        if (playerHealth != null)
-        {
-            playerHealth.TakeDamage(1);
-        }
-        
-        // LevelManager.manager.GameOver();
-        Destroy(gameObject);
-        target = null;
-        
+            if (playerHealth != null)
+            {
+                playerHealth.TakeDamage(1);
+            }
+
+            Destroy(gameObject);
+            target = null;
         }
         else if (other.gameObject.CompareTag("Bullet"))
         {
@@ -81,4 +89,5 @@ public class EnemyChaser : MonoBehaviour
             Destroy(gameObject);
         }
     }
+
 }

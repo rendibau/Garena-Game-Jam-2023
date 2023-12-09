@@ -4,28 +4,28 @@ using UnityEngine;
 
 public class PlayerHealth : MonoBehaviour
 {
-   public int health;
-   public int maxHealth = 4;
+    public int maxHealth = 4;
+    private int currentHealth;
 
-   public SpriteRenderer playerSr;
-   public CharacterController playerMm;
-
-    void Start()
+    private void Start()
     {
-        health = maxHealth;
+        currentHealth = maxHealth;
     }
 
-   public void TakeDamage(int amount)
-   {
-        health -= amount;
-        if(health <= 0)
-        {
-            playerSr.enabled = false;
-            playerMm.enabled = false;
-        }
-   }
-    void Update()
+    public void TakeDamage(int damage)
     {
-        
+        currentHealth -= damage;
+        Debug.Log("Player took " + damage + " damage. Current Health: " + currentHealth);
+
+        if (currentHealth <= 0)
+        {
+            LevelManager.manager.GameOver();
+            Destroy(gameObject);
+        }
+    }
+
+    public int GetCurrentHealth()
+    {
+        return currentHealth;
     }
 }

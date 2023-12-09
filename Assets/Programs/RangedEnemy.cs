@@ -9,6 +9,9 @@ public class RangedEnemy : MonoBehaviour
     public float rotateSpeed = 0.0025f;
     private Rigidbody2D rb;
     public GameObject bulletPrefab;
+    public int maxHealth = 4;
+    private int currentHealth;
+    public PlayerHealth playerHealth;
 
     public float distanceToShoot = 5f;
     public float distanceToStop = 3f;
@@ -21,7 +24,27 @@ public class RangedEnemy : MonoBehaviour
     private void Start()
     {
         rb = GetComponent<Rigidbody2D>();
+        currentHealth = maxHealth;
     }
+
+    public void TakeDamage(int damage)
+    {
+        currentHealth -= damage;
+        Debug.Log("Musuh menerima " + damage + " damage. Kesehatan Saat Ini: " + currentHealth);
+
+        if (currentHealth <= 0)
+        {
+            LevelManager.manager.IncreaseScore(1); // Tingkatkan skor saat musuh berhasil dihancurkan
+            Destroy(gameObject);
+            target = null;
+        }
+        else if (currentHealth <= maxHealth - 4) // Periksa apakah musuh sudah terkena 4 kali
+        {
+            LevelManager.manager.GameOver();
+        }
+    }
+
+
     private void Update()
     {
         if (!target)
@@ -37,6 +60,7 @@ public class RangedEnemy : MonoBehaviour
             Shoot();
         }
     }
+
     private void Shoot()
     {
         if (timeToFire <= 0f)
@@ -49,6 +73,7 @@ public class RangedEnemy : MonoBehaviour
             timeToFire -= Time.deltaTime;
         }
     }
+
     private void FixedUpdate()
     {
         if (target != null)
@@ -62,8 +87,8 @@ public class RangedEnemy : MonoBehaviour
                 rb.velocity = Vector2.zero;
             }
         }
-
     }
+
     private void RotateTowardsTarget()
     {
         Vector2 targetDirection = target.position - transform.position;
@@ -71,6 +96,7 @@ public class RangedEnemy : MonoBehaviour
         Quaternion q = Quaternion.Euler(new Vector3(0, 0, angle));
         transform.localRotation = Quaternion.Slerp(transform.localRotation, q, rotateSpeed);
     }
+
     private void GetTarget()
     {
         if (GameObject.FindGameObjectWithTag("Player"))
@@ -83,8 +109,18 @@ public class RangedEnemy : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Player"))
         {
-            LevelManager.manager.GameOver();
-            // Destroy(other.gameObject);
+            PlayerHealth playerHealth = other.gameObject.GetComponent<PlayerHealth>();
+            if (playerHealth != null)
+            {
+                playerHealth.TakeDamage(1);
+
+                if (playerHealth.GetCurrentHealth() <= 0)
+                {
+                    LevelManager.manager.GameOver();
+                }
+            }
+
+            Destroy(gameObject);
             target = null;
         }
         else if (other.gameObject.CompareTag("Bullet"))
