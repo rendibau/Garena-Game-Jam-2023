@@ -2,12 +2,21 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EnemyChaser : MonoBehaviour
+public class RangedEnemy : MonoBehaviour
 {
     public Transform target;
     public float speed = 3f;
     public float rotateSpeed = 0.0025f;
     private Rigidbody2D rb;
+    public GameObject bulletPrefab;
+
+    public float distanceToShoot = 5f;
+    public float distanceToStop = 3f;
+
+    public float fireRate;
+    private float timeToFire;
+
+    public Transform firingPoint;
 
     private void Start()
     {
@@ -23,10 +32,37 @@ public class EnemyChaser : MonoBehaviour
         {
             RotateTowardsTarget();
         }
+        if (target != null && Vector2.Distance(target.position, transform.position) <= distanceToShoot)
+        {
+            Shoot();
+        }
+    }
+    private void Shoot()
+    {
+        if (timeToFire <= 0f)
+        {
+            Instantiate(bulletPrefab, firingPoint.position, firingPoint.rotation);
+            timeToFire = fireRate;
+        }
+        else
+        {
+            timeToFire -= Time.deltaTime;
+        }
     }
     private void FixedUpdate()
     {
-        rb.velocity = transform.up * speed;
+        if (target != null)
+        {
+            if (Vector2.Distance(target.position, transform.position) >= distanceToStop)
+            {
+                rb.velocity = transform.up * speed;
+            }
+            else
+            {
+                rb.velocity = Vector2.zero;
+            }
+        }
+
     }
     private void RotateTowardsTarget()
     {
@@ -42,6 +78,7 @@ public class EnemyChaser : MonoBehaviour
             target = GameObject.FindGameObjectWithTag("Player").transform;
         }
     }
+
     private void OnCollisionEnter2D(Collision2D other)
     {
         if (other.gameObject.CompareTag("Player"))
@@ -52,10 +89,9 @@ public class EnemyChaser : MonoBehaviour
         }
         else if (other.gameObject.CompareTag("Bullet"))
         {
-            LevelManager.manager.IncreaseScore(1);
+            LevelManager.manager.IncreaseScore(3);
             Destroy(other.gameObject);
             Destroy(gameObject);
         }
-
     }
 }

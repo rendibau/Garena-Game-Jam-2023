@@ -35,7 +35,8 @@ public class CharacterController : MonoBehaviour
         {
             Shoot();
             fireTimer = fireRate;
-        } else
+        }
+        else
         {
             fireTimer -= Time.deltaTime;
         }
@@ -51,6 +52,12 @@ public class CharacterController : MonoBehaviour
         Instantiate(bulletPrefab, firingPoint.position, firingPoint.rotation);
     }
 
-
-
+    private void OnCollisionEnter2D(Collision2D other)
+    {
+        if (other.gameObject.CompareTag("EnemyBullet"))
+        {
+            LevelManager.manager.GameOver();
+            Destroy(gameObject);
+        }
+    }
 }

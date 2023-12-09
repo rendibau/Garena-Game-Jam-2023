@@ -4,44 +4,23 @@ using UnityEngine;
 
 public class EnemySpawner : MonoBehaviour
 {
-    public GameObject enemyPrefab;  // Prefab enemy
-    public int numberOfEnemies = 5;  // Jumlah enemy yang akan di-spawn
-    public float spawnInterval = 2f;  // Waktu antara spawn enemy
-    public float spawnRadius = 5f;  // Radius spawn enemy
-
-    private float timer = 0f;
-    private int enemiesSpawned = 0;
-
-    void Update()
+    [SerializeField] private float spawnRate = 1f;
+    [SerializeField] private GameObject[] enemyPrefabs;
+    [SerializeField] private bool canSpawn = true;
+    private void Start()
     {
-        // Jika masih ada enemy yang perlu di-spawn
-        if (enemiesSpawned < numberOfEnemies)
-        {
-            timer += Time.deltaTime;
-
-            // Jika waktu sudah mencapai spawnInterval, spawn enemy
-            if (timer >= spawnInterval)
-            {
-                SpawnEnemy();
-                timer = 0f;  // Reset timer
-            }
-        }
+        StartCoroutine(Spawner());
     }
-
-    void SpawnEnemy()
+    private IEnumerator Spawner()
     {
-        // Mendapatkan posisi acak dalam radius spawnRadius
-        Vector2 randomSpawnPoint = (Random.insideUnitCircle * spawnRadius) + (Vector2)transform.position;
-
-        // Melakukan spawn enemy di posisi acak
-        Instantiate(enemyPrefab, randomSpawnPoint, Quaternion.identity);
-
-        enemiesSpawned++;
-
-        // Jika sudah mencapai jumlah maksimal, hentikan spawning
-        if (enemiesSpawned >= numberOfEnemies)
+        WaitForSeconds wait = new WaitForSeconds(spawnRate);
+        while (canSpawn)
         {
-            enabled = false;  // Matikan script
+            yield return wait;
+            int rand = Random.Range(0, enemyPrefabs.Length);
+            GameObject enemyToSpawn = enemyPrefabs[rand];
+            Instantiate(enemyToSpawn, transform.position, Quaternion.identity);
         }
+
     }
 }

@@ -119,6 +119,7 @@ TextureImporter:
     crunchedCompression: 0
     allowsAlphaSplitting: 0
     overridden: 0
+    ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
   - serializedVersion: 3
@@ -131,6 +132,7 @@ TextureImporter:
     crunchedCompression: 0
     allowsAlphaSplitting: 0
     overridden: 0
+    ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
   - serializedVersion: 3
@@ -143,6 +145,7 @@ TextureImporter:
     crunchedCompression: 0
     allowsAlphaSplitting: 0
     overridden: 0
+    ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
   - serializedVersion: 3
@@ -155,6 +158,7 @@ TextureImporter:
     crunchedCompression: 0
     allowsAlphaSplitting: 0
     overridden: 0
+    ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
   - serializedVersion: 3
@@ -167,6 +171,7 @@ TextureImporter:
     crunchedCompression: 0
     allowsAlphaSplitting: 0
     overridden: 0
+    ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
   - serializedVersion: 3
@@ -179,6 +184,20 @@ TextureImporter:
     crunchedCompression: 0
     allowsAlphaSplitting: 0
     overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Server
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
@@ -488,7 +507,21 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      UI Main Menu (NO BG konsep)_0: -2691418710054819226
+      UI Main Menu (NO BG konsep)_1: -1159376448971162493
+      UI Main Menu (NO BG konsep)_10: 2949267025038693119
+      UI Main Menu (NO BG konsep)_11: 2992837262847289965
+      UI Main Menu (NO BG konsep)_12: 6733615309313889319
+      UI Main Menu (NO BG konsep)_13: 7455878475300818352
+      UI Main Menu (NO BG konsep)_2: -7138769674062923440
+      UI Main Menu (NO BG konsep)_3: -8861331857372243359
+      UI Main Menu (NO BG konsep)_4: 992208090359343802
+      UI Main Menu (NO BG konsep)_5: 6906632062774823264
+      UI Main Menu (NO BG konsep)_6: -511418708696574145
+      UI Main Menu (NO BG konsep)_7: 7782284008663776660
+      UI Main Menu (NO BG konsep)_8: 4356403054792590228
+      UI Main Menu (NO BG konsep)_9: 7542804930633269746
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
