@@ -59,5 +59,6 @@ public class CharacterController : MonoBehaviour
             LevelManager.manager.GameOver();
             Destroy(gameObject);
         }
+        
     }
 }

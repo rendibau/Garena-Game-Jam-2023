@@ -84,7 +84,7 @@ public class RangedEnemy : MonoBehaviour
         if (other.gameObject.CompareTag("Player"))
         {
             LevelManager.manager.GameOver();
-            Destroy(other.gameObject);
+            // Destroy(other.gameObject);
             target = null;
         }
         else if (other.gameObject.CompareTag("Bullet"))

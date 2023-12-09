@@ -8,10 +8,27 @@ public class EnemyChaser : MonoBehaviour
     public float speed = 3f;
     public float rotateSpeed = 0.0025f;
     private Rigidbody2D rb;
+    public int maxHealth = 4;
+    private int currentHealth;
+    public PlayerHealth playerHealth;
 
     private void Start()
     {
         rb = GetComponent<Rigidbody2D>();
+        currentHealth = maxHealth;
+    }
+
+    public void TakeDamage(int damage)
+    {
+        currentHealth -= damage;
+        Debug.Log("Player took " + damage + " damage. Current Health: " + currentHealth);
+        
+        if(currentHealth == 0)
+        {
+            LevelManager.manager.GameOver();
+        Destroy(gameObject);
+        target = null;
+        }
     }
     private void Update()
     {
@@ -46,9 +63,16 @@ public class EnemyChaser : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Player"))
         {
-            LevelManager.manager.GameOver();
-            Destroy(other.gameObject);
-            target = null;
+            PlayerHealth playerHealth = other.gameObject.GetComponent<PlayerHealth>();
+        if (playerHealth != null)
+        {
+            playerHealth.TakeDamage(1);
+        }
+        
+        // LevelManager.manager.GameOver();
+        Destroy(gameObject);
+        target = null;
+        
         }
         else if (other.gameObject.CompareTag("Bullet"))
         {
@@ -56,6 +80,5 @@ public class EnemyChaser : MonoBehaviour
             Destroy(other.gameObject);
             Destroy(gameObject);
         }
-
     }
 }
