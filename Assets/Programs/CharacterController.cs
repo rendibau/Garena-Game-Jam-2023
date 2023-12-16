@@ -7,6 +7,7 @@ public class CharacterController : MonoBehaviour
     [SerializeField] private float speed = 5f;
     [SerializeField] private GameObject bulletPrefab;
     [SerializeField] private Transform firingPoint;
+    [SerializeField] private AudioClip shootingSound;
     [Range(0.1f, 2f)]
     [SerializeField] private float fireRate = 0.5f;
 
@@ -17,11 +18,14 @@ public class CharacterController : MonoBehaviour
     private int playerHealth = 4; // Tambahkan variabel kesehatan pemain
     private Vector2 mousePos;
     private Animator animator;
+    public float bulletForce = 20f;
+    private AudioManager audioManager;
 
     private void Start()
     {
         rb = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
+        audioManager = GameObject.FindGameObjectWithTag("Audio").GetComponent<AudioManager>();
     }
 
     private void Update()
@@ -35,6 +39,7 @@ public class CharacterController : MonoBehaviour
         if (Input.GetMouseButtonDown(0) && fireTimer <= 0f)
         {
             Shoot();
+            audioManager.PlaySFX(audioManager.sg);
             fireTimer = fireRate;
         }
         else
@@ -42,7 +47,7 @@ public class CharacterController : MonoBehaviour
             fireTimer -= Time.deltaTime;
         }
 
-        if (playerHealth <= 0) // Tambahkan pengecekan jika kesehatan pemain kurang dari atau sama dengan 0
+        if (playerHealth < 0) // Tambahkan pengecekan jika kesehatan pemain kurang dari atau sama dengan 0
         {
             LevelManager.manager.GameOver();
             Destroy(gameObject);
@@ -63,7 +68,9 @@ public class CharacterController : MonoBehaviour
 
     private void Shoot()
     {
-        Instantiate(bulletPrefab, firingPoint.position, firingPoint.rotation);
+        GameObject bullet = Instantiate(bulletPrefab, firingPoint.position, firingPoint.rotation);
+        Rigidbody2D rb = bullet.GetComponent<Rigidbody2D>();
+        rb.AddForce(firingPoint.up * bulletForce, ForceMode2D.Impulse);
     }
 
     public void TakeDamage(int damage) // Tambahkan metode untuk mengurangi kesehatan pemain
@@ -76,9 +83,20 @@ public class CharacterController : MonoBehaviour
     {
         if (other.gameObject.CompareTag("EnemyBullet"))
         {
-            TakeDamage(1); // Inflik damage pada pemain ketika terkena peluru musuh
             LevelManager.manager.GameOver();
+            TakeDamage(1); // Inflik damage pada pemain ketika terkena peluru musuh
             Destroy(gameObject);
         }
     }
+
+    private void OnCollisionEnter(Collision2D collision) 
+    {
+        if (collision.gameObject.CompareTag("Bullet")) {
+            
+            collision.gameObject.GetComponent<Rigidbody>().velocity = Vector3.zero;
+            collision.gameObject.GetComponent<Rigidbody>().isKinematic = true;
+            Destroy(gameObject);
+    }
+}
+
 }

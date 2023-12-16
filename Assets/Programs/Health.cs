@@ -6,6 +6,8 @@ using UnityEngine.UI;
 
 public class Health : MonoBehaviour
 {
+    public int currentHealth;
+    public int maxHealth;
     public PlayerHealth playerHealth;
     public Sprite emptyHeart;
     public Sprite fullHeart;
@@ -13,8 +15,8 @@ public class Health : MonoBehaviour
 
     void Update()
     {
-        int currentHealth = playerHealth.GetCurrentHealth();
-        int maxHealth = playerHealth.maxHealth;
+        currentHealth = playerHealth.GetCurrentHealth();
+        maxHealth = playerHealth.maxHealth;
 
         for (int i = 0; i < 4; i++)
         {

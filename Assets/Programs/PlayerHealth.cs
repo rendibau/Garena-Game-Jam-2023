@@ -6,6 +6,8 @@ public class PlayerHealth : MonoBehaviour
 {
     public int maxHealth = 4;
     private int currentHealth;
+    public SpriteRenderer playerSr;
+    public CharacterController playerMm;
 
     private void Start()
     {
@@ -19,6 +21,8 @@ public class PlayerHealth : MonoBehaviour
 
         if (currentHealth <= 0)
         {
+            playerSr.enabled = false;
+            playerMm.enabled = false;
             LevelManager.manager.GameOver();
             Destroy(gameObject);
         }

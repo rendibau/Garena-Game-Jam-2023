@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Bullets : MonoBehaviour
 {
+    public GameObject hitEffect;
     [Range(1, 10)]
     [SerializeField] private float speed = 10f;
 
@@ -21,5 +22,12 @@ public class Bullets : MonoBehaviour
     private void FixedUpdate()
     {
         rb.velocity = transform.up * speed;
+    }
+
+    void OnCollisionEnter2D(Collision2D collision)
+    {
+        GameObject effect = Instantiate(hitEffect, transform.position, Quaternion.identity);
+        Destroy(effect, 5f);
+        Destroy(gameObject);
     }
 }
